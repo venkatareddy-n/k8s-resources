@@ -85,6 +85,48 @@ kubectl exec -it multi-container -c nginx-1 -- bash --> enter to nginx container
 
 LABELS
 =======
+kind: Pod
+apiVersion: v1
+metadata:
+  name: labels
+  labels:
+    project: expense
+    module: backend
+    environment: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+kubectl apply -f 04-labels.yaml --> to create pod
+
+kubectl describe pod labels --> to check pod information in docker we use inspect
+---------------------------------------------------------------------------------
+
+Annotations
+===========
+Annotations we use urls, special commands
+we can keep complex characters
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: annotations
+  annotations:
+    imageregistry: "https://hub.docker.com/"
+    buildURL: "https://jenkins.joindevops.com/expense/backend/build/67"
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+----------------------------------------
+
+environment variables
+=====================
+env in Dockerfile should rebuild if you change
+env in manifest no need to rebuild, just restart is enough
+
+
 
 
 
