@@ -10,10 +10,19 @@ metadata:
   labels:
 spec:
 
-
 apiVersion: v1
 kind: Namespace
-metadata:
-  name: development
+metadata: 
+  name: expense
   labels:
-    name: development
+    project: expense-project
+    environment: dev
+
+kubectl apply -f 01-namespace.yaml  --> to create namespace
+
+kubectl get namespaces --> to check namespaces
+
+kubectl delete -f 01-namespace.yaml --> to delect namespaces
+
+
+
