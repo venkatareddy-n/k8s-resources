@@ -25,6 +25,8 @@ kubectl get namespaces --> to check namespaces
 kubectl delete -f 01-namespace.yaml --> to delect namespaces
 ------------------------------------------------------------
 
+POD 
+===
 apiVersion: v1
 kind: Pod
 metadata:
@@ -42,7 +44,35 @@ kubectl get pods
 
 to enter into the pod
 kubectl exec -it nginx-server -- bash
+--------------------------------------
 
+one pod have 2 containers
+multi-container
+===============
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: multi-container
+spec:
+  containers:
+  - name: nginx-1
+    image: nginx
+  - name: almalinux-1
+    image: almalinux:9
+    command: ["sleep","1000"]
+
+Error
+====
+CrashLoopBackOff --> with your command container not able to start, 
+
+kubectl exec -it multi-container -c almalinux-1 -- bash --> enter to almalinux container
+
+kubectl exec -it multi-container -c nginx-1 -- bash --> enter to nginx container
+----------------------------------------------------------------------------------
+
+LABELS
+=======
 
 
 

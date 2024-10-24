@@ -1,0 +1,8 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: label-demo
+  labels:
+    project: expense
+    module: backend
+    environment: dev
