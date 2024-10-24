@@ -23,6 +23,26 @@ kubectl apply -f 01-namespace.yaml  --> to create namespace
 kubectl get namespaces --> to check namespaces
 
 kubectl delete -f 01-namespace.yaml --> to delect namespaces
+------------------------------------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-server
+spec:
+  containers:  # this is equals to docker run -d --name nginx-server nginx
+  - name: nginx-server
+    image: nginx
+
+
+kubectl apply -f 02-pod.yaml
+
+kubectl get pods
+----------------
+
+to enter into the pod
+kubectl exec -it nginx-server -- bash
+
 
 
 
