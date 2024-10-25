@@ -224,6 +224,49 @@ siva kumar
 
 ---------------
 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-config
+spec:
+  containers:
+  - name: nginx-server
+    image: nginx
+    env:
+      - name: course_name
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info  # name of the config map, it will get values from there
+            key: course  # env.name and config map key name no need to be same
+      - name: trainser
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info
+            key: trainser 
+      - name: total_duration
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info
+            key: duration 
+
+kubectl apply -f 09-config-map-pod.yaml
+
+kubectl exec -it pod-config -- bash --> enter inside the pod and check env
+
+exit
+
+kubectl edit configmap config-map-info  --> edit the values in config map and save
+
+to effect the changes need to restart the pod (restart means delete the pod and create again)
+
+kubectl delete pod pod-config --> delete the pod 
+
+kubectl apply -f 09-config-map-pod.yaml
+
+kubectl exec -it pod-config -- bash --> enter inside the pod and check env
+
+exit
+------------------
 
 
 
