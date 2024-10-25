@@ -183,6 +183,46 @@ Limits:
 
 Config map
 ==========
+to store the variables and values
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-info
+data:
+  course: devops
+  trainser: "siva kumar"
+  duration: "4 Months"
+
+kubectl apply -f 08-config-map-info.yaml
+
+kubectl get configmaps --> t0 see all config maps
+
+kubectl describe configmap config-map-info --> configmap describe to see variables
+
+output
+------
+[ ec2-user@ip-172-31-89-76 ~/k8s-resources ]$ kubectl describe configmap config-map-info
+Name:         config-map-info
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+course:
+----
+devops
+
+duration:
+----
+4 Months
+
+trainser:
+----
+siva kumar
+
+---------------
 
 
 
