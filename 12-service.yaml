@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-cluster-ip
+spec:
+  selector:
+    project: expense
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx-server-port
+    protocol: tcp
+    port: 80 #service port
+    targetPort: 80 #container port

@@ -267,7 +267,21 @@ kubectl exec -it pod-config -- bash --> enter inside the pod and check env
 
 exit
 ------------------
+2nd method to get all values at a time
 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-config
+spec:
+  containers:
+  - name: nginx-server
+    image: nginx
+    envFrom:
+    - configMapRef:
+        name: config-map-info   
+
+-------------------------------------
 
 
 
