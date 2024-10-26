@@ -9,6 +9,6 @@ spec:
     environment: dev
   ports:
   - name: nginx-server-port
-    protocol: tcp
+    protocol: TCP
     port: 80 #service port
     targetPort: 80 #container port
