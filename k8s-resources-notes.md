@@ -363,6 +363,8 @@ kubectl describe service  name: nginx-cluster-ip-service  --> to see fill info o
 
 13-Nodeport Service
 ====================
+nodeport is used to expose to the enxternal world
+Exposes the Service on each Node's IP at a static port (the NodePort). To make the node port available, Kubernetes sets up a cluster IP address, the same as if you had requested a Service of type: ClusterIP.
 
 kind: Service
 apiVersion: v1
@@ -388,6 +390,7 @@ kubectl describe service <service_name>
 
 kubectl describe service nginx-nodeport  --> to see fill info of a service
 
+kubectl get pods -o wide
 
 
 
