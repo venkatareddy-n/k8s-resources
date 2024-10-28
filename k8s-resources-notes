@@ -393,4 +393,32 @@ kubectl describe service nginx-nodeport  --> to see fill info of a service
 kubectl get pods -o wide
 
 
+13-LoadBalancer Service
+=======================
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    project: expense
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx-server-port
+    protocol: TCP
+    port: 80 #service port
+    targetPort: 80 #container port
+
+ kubectl apply -f 14-loadbalancer-service.yaml
+
+kubectl get services
+
+here you can find external ip like below
+a5a24992f0c9048889e8bc224e0eec62-1727484752.us-east-1.elb.amazonaws.com
+
+http://a5a24992f0c9048889e8bc224e0eec62-1727484752.us-east-1.elb.amazonaws.com --> access website
 
