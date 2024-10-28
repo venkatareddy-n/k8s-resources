@@ -7,17 +7,17 @@ spec:
   - name: nginx-server
     image: nginx
     env:
-      - name: course-1
+      - name: course_name
         valueFrom:
           configMapKeyRef:
             name: config-map-info  # name of the config map, it will get values from there
             key: course  # env.name and config map key name no need to be same
-      - name: trainser
+      - name: trainser_name
         valueFrom:
           configMapKeyRef:
             name: config-map-info
             key: trainser
-      - name: duration
+      - name: total_duration
         valueFrom:
           configMapKeyRef:
             name: config-map-info
