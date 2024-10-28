@@ -487,6 +487,58 @@ kubectl describe service nginx
 kubectl delete -f 15-replicaset.yaml  --> delete replica set
 
 
+16-Deployment
+=============
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels: # these are replicaset labels
+    app: nginx
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    # these are used to select the pod to create replicas
+    matchLabels:
+      tier: frontend
+      app: nginx
+  # this is pod definition
+  template:
+    metadata:
+      # these labels belongs to pod
+      labels:
+        tier: frontend
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-perl
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  selector:
+    tier: frontend
+    app: nginx
+  ports:
+  - name: nginx-svc-port
+    protocol: TCP
+    port: 80 # service port
+    targetPort: 80 # container port
 
+kubectl apply -f 16-deployment.yaml
 
+kubectl get pods
+
+watch kubectl get pods --> to see updates every 2 seconds
+
+kubectl get deployment
+
+kubectl get replicaset
+
+kubectl delete -f 16-deployment.yaml --> to delete
 
