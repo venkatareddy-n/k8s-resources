@@ -12,9 +12,13 @@ Client Version: v1.31.0-eks-a737599
 
 Resources
 ==========
-
 namespace
 ----------
+In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster.
+Names of resources need to be unique within a namespace, but not across namespaces. 
+
+namespace structure
+-------------------
 apiVersion:
 kind: Namespace
 metadata:
@@ -22,6 +26,8 @@ metadata:
   labels:
 spec:
 
+sample namespace creation
+-------------------------
 apiVersion: v1
 kind: Namespace
 metadata: 
@@ -30,15 +36,22 @@ metadata:
     project: expense-project
     environment: dev
 
+---------------------------------
 kubectl apply -f 01-namespace.yaml  --> to create namespace
 
 kubectl get namespaces --> to check namespaces
 
-kubectl delete -f 01-namespace.yaml --> to delect namespaces
+kubectl delete namespace <namespace_name> --> to delete namespace
+
+kubectl delete namespace expense
 ------------------------------------------------------------
 
-POD 
-===
+PODs
+====
+Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.
+
+A Pod is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers.
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -49,18 +62,19 @@ spec:
     image: nginx
 
 
-kubectl apply -f 02-pod.yaml
+kubectl apply -f 02-pod.yaml --> create the bod
 
-kubectl get pods
-----------------
+kubectl get pods --> to check the pods list
 
-to enter into the pod
-kubectl exec -it nginx-server -- bash
+kubectl exec -it nginx-server -- bash  --> to enter inside the pod
+
+kubectl delete pod <pod_name> --> to delete the pod
+kubectl delete pod nginx-server
 --------------------------------------
 
-one pod have 2 containers
 multi-container
 ===============
+one pod have 2 containers 
 
 kind: Pod
 apiVersion: v1
@@ -68,9 +82,9 @@ metadata:
   name: multi-container
 spec:
   containers:
-  - name: nginx-1
+  - name: nginx-server
     image: nginx
-  - name: almalinux-1
+  - name: almalinux-server
     image: almalinux:9
     command: ["sleep","1000"]
 
