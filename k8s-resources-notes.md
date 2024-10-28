@@ -333,15 +333,14 @@ we have 3 types of services
 2. Nodeport
 3. LoadBalancer
 
-12-Cluster IP 
-=============
-cluster ip 
-
+12-Cluster IP Service
+=====================
+cluster ip, it is default, it is only for internal pod tp pod communication.
 
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx-cluster-ip
+  name:   name: nginx-cluster-ip-service
 spec:
   selector:
     project: expense
@@ -353,7 +352,41 @@ spec:
     port: 80 #service port
     targetPort: 80 #container port
 
+kubectl apply -f 12-cluster-ip-service.yaml --> create service
 
+kubectl get services  --> to see all services
+
+kubectl describe service <service_name>
+
+kubectl describe service  name: nginx-cluster-ip-service  --> to see fill info of a service
+
+
+13-Nodeport Service
+====================
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-nodeport
+spec:
+  type: NodePort
+  selector:
+    project: expense
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx-server-port
+    protocol: TCP
+    port: 80 #service port
+    targetPort: 80 #container port
+
+kubectl apply -f 13-nodeport-service.yaml --> create service
+
+kubectl get services  --> to see all services
+
+kubectl describe service <service_name>
+
+kubectl describe service nginx-nodeport  --> to see fill info of a service
 
 
 
