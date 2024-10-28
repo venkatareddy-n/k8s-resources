@@ -6,23 +6,19 @@ spec:
   containers:
   - name: nginx-server
     image: nginx
-    envFrom:
-    - configMapRef:
-        name: config-map-info    
-    
-    # env:
-    #   - name: course_name
-    #     valueFrom:
-    #       configMapKeyRef:
-    #         name: config-map-info  # name of the config map, it will get values from there
-    #         key: course  # env.name and config map key name no need to be same
-    #   - name: trainser
-    #     valueFrom:
-    #       configMapKeyRef:
-    #         name: config-map-info
-    #         key: trainser 
-    #   - name: total_duration
-    #     valueFrom:
-    #       configMapKeyRef:
-    #         name: config-map-info
-    #         key: duration 
+    env:
+      - name: course_name
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info  # name of the config map, it will get values from there
+            key: course  # env.name and config map key name no need to be same
+      - name: trainser_name
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info
+            key: trainser 
+      - name: total_duration
+        valueFrom:
+          configMapKeyRef:
+            name: config-map-info
+            key: duration 

@@ -12,8 +12,8 @@ Client Version: v1.31.0-eks-a737599
 
 Resources
 ==========
-namespace
-----------
+1-Namespaces
+===========
 In Kubernetes, namespaces provide a mechanism for isolating groups of resources within a single cluster.
 Names of resources need to be unique within a namespace, but not across namespaces. 
 
@@ -31,7 +31,7 @@ sample namespace creation
 apiVersion: v1
 kind: Namespace
 metadata: 
-  name: expense
+  name: expense  # it will create pod with this name expense
   labels:
     project: expense-project
     environment: dev
@@ -46,8 +46,8 @@ kubectl delete namespace <namespace_name> --> to delete namespace
 kubectl delete namespace expense
 ------------------------------------------------------------
 
-PODs
-====
+2-PODs
+======
 Pods are the smallest deployable units in kubernetes, 
 pod can contain one or many containers
 
@@ -73,8 +73,8 @@ kubectl delete pod <pod_name> --> to delete the pod
 kubectl delete pod nginx-server
 --------------------------------------
 
-multi-container
-===============
+3-multi-container
+=================
 one pod have 2 containers 
 
 kind: Pod
@@ -100,8 +100,10 @@ kubectl exec -it multi-container -c almalinux-server -- bash --> enter to almali
 kubectl exec -it multi-container -c  nginx-server -- bash --> enter to nginx container
 ----------------------------------------------------------------------------------
 
-LABELS
-=======
+4-LABELS
+========
+labels are used for kubernetes internal resource characters
+
 kind: Pod
 apiVersion: v1
 metadata:
@@ -123,8 +125,9 @@ kubectl describe pod <pod_name>
 kubectl describe pod labels --> to check pod information in docker we use inspect
 ---------------------------------------------------------------------------------
 
-Annotations
-===========
+5-Annotations
+=============
+Annptations are used for kubernetes external resource characters
 Annotations we use urls, special commands
 we can keep complex characters
 
@@ -144,12 +147,10 @@ kubectl describe pod <pod_name>
 kubectl describe pod annotations --> to check pod information
 -------------------------------------------------------------
 
-
-
-environment variables
-=====================
-env in Dockerfile should rebuild if you change
-env in manifest no need to rebuild, just restart is enough 
+6-Environment Variables
+=======================
+env in Dockerfile should rebuild if you change (docker build -t image_name)
+env in manifest no need to rebuild, just restart is enough (kubectl apply -f file_name)
 
 apiVersion: v1
 kind: Pod
@@ -168,10 +169,12 @@ spec:
 kubectl describe pod env-demo
 
 kubectl exec -it env-demo -- bash --> to enter inside the 
----------------------------------
 
-Resources Limits
-================
+env --> to see environtment variales information.
+-------------------------------------------------
+
+7-Resources Limits
+==================
 apiVersion: v1
 kind: Pod
 metadata:
@@ -206,22 +209,22 @@ Limits:
       memory:     68Mi
 ---------------------------
 
-Config map
-==========
-to store the variables and values
+8-Config map
+============
+config map is use to store the variables and values
 
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-map-info
 data:
-  course: devops
-  trainser: "siva kumar"
-  duration: "4 Months"
+  course: devops-1
+  trainser: "siva kumar-1"
+  duration: "4 Months-1"
 
 kubectl apply -f 08-config-map-info.yaml
 
-kubectl get configmaps --> t0 see all config maps
+kubectl get configmaps --> to see all config maps information
 
 kubectl describe configmap config-map-info --> configmap describe to see variables
 

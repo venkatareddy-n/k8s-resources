@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: config-map-info
 data:
-  course: devops
-  trainser: "siva kumar"
-  duration: "4 Months"
+  course: devops-1
+  trainser: "siva kumar-1"
+  duration: "4 Months-1"
