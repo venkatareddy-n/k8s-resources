@@ -420,5 +420,20 @@ kubectl get services
 here you can find external ip like below
 a5a24992f0c9048889e8bc224e0eec62-1727484752.us-east-1.elb.amazonaws.com
 
-http://a5a24992f0c9048889e8bc224e0eec62-1727484752.us-east-1.elb.amazonaws.com --> access website
+http://a5a24992f0c9048889e8bc224e0eec62-1727484752.us-east-1.elb.amazonaws.com --> to access website
+
+Sets
+====
+sets have 4 types
+1. Replicaset
+2. Deployment
+3. Daemon
+4. StatefulSet
+
+ReplicaSet
+==========
+make sure your desired number of pods running all the time.
+
+
+
 
