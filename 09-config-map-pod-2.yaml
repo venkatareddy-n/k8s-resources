@@ -1,7 +1,8 @@
+#2nd method to get all the values
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-config
+  name: pod-config-2
 spec:
   containers:
   - name: nginx-server

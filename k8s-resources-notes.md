@@ -251,11 +251,12 @@ trainser:
 siva kumar
 
 ---------------
-
+Example-1 : retrieve or get the values
+==========
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-config
+  name: pod-config-1
 spec:
   containers:
   - name: nginx-server
@@ -266,32 +267,37 @@ spec:
           configMapKeyRef:
             name: config-map-info  # name of the config map, it will get values from there
             key: course  # env.name and config map key name no need to be same
-      - name: trainser
+      - name: trainser_name
         valueFrom:
           configMapKeyRef:
             name: config-map-info
-            key: trainser 
+            key: trainser
       - name: total_duration
         valueFrom:
           configMapKeyRef:
             name: config-map-info
             key: duration 
 
-kubectl apply -f 09-config-map-pod.yaml
+kubectl apply -f 09-config-map-pod-1.yaml
 
-kubectl exec -it pod-config -- bash --> enter inside the pod and check env
+kubectl exec -it pod-config -- bash --> enter inside the pod 
+env --> to check all environment variables
 
 exit
 
-kubectl edit configmap config-map-info  --> edit the values in config map and save
+kubectl get configmaps --> to see all config maps information
+
+kubectl edit configmap <configmap_name>  --> edit the values in config map and save
+
+kubectl edit configmap config-map-info --> in vi editor change the values
 
 to effect the changes need to restart the pod (restart means delete the pod and create again)
 
-kubectl delete pod pod-config --> delete the pod 
+kubectl delete pod pod-config-1 --> delete the pod 
 
-kubectl apply -f 09-config-map-pod.yaml
+kubectl apply -f 09-config-map-pod-1.yaml  --> create pod again to get new values
 
-kubectl exec -it pod-config -- bash --> enter inside the pod and check env
+kubectl exec -it pod-config-1 -- bash --> enter inside the pod and check env
 
 exit
 ------------------
@@ -309,7 +315,46 @@ spec:
     - configMapRef:
         name: config-map-info   
 
+kubectl apply -f 09-config-map-pod-2.yaml
+
 -------------------------------------
+
+srevice
+=======
+how can you access your pod in internet or outside ?
+Ans: by exposing to services.
+
+kubernetes service is a method for exposing a network application that is runnig as one or more pods in your cluster.
+
+service select pods using labels.
+
+we have 3 types of services
+1. cluster IP - by default
+2. Nodeport
+3. LoadBalancer
+
+12-Cluster IP 
+=============
+cluster ip 
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx-cluster-ip
+spec:
+  selector:
+    project: expense
+    module: backend
+    environment: dev
+  ports:
+  - name: nginx-server-port
+    protocol: TCP
+    port: 80 #service port
+    targetPort: 80 #container port
+
+
+
 
 
 
