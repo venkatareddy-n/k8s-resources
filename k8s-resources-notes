@@ -436,4 +436,10 @@ make sure your desired number of pods running all the time.
 
 
 
+kubectl apply -f 15-replicaset.yaml
+
+kubectl get replicaset
+
+
+
 
