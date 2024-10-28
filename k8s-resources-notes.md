@@ -48,7 +48,8 @@ kubectl delete namespace expense
 
 PODs
 ====
-Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.
+Pods are the smallest deployable units in kubernetes, 
+pod can contain one or many containers
 
 A Pod is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers.
 
@@ -89,12 +90,14 @@ spec:
     command: ["sleep","1000"]
 
 Error
-====
-CrashLoopBackOff --> with your command container not able to start, 
+=====
+CrashLoopBackOff --> with your command container not able to start, check the command to run container
 
-kubectl exec -it multi-container -c almalinux-1 -- bash --> enter to almalinux container
+RunContainer Error --> with your command container not able to start
 
-kubectl exec -it multi-container -c nginx-1 -- bash --> enter to nginx container
+kubectl exec -it multi-container -c almalinux-server -- bash --> enter to almalinux container
+
+kubectl exec -it multi-container -c  nginx-server -- bash --> enter to nginx container
 ----------------------------------------------------------------------------------
 
 LABELS
@@ -114,6 +117,9 @@ spec:
 
 kubectl apply -f 04-labels.yaml --> to create pod
 
+to check full information of the pod
+
+kubectl describe pod <pod_name>
 kubectl describe pod labels --> to check pod information in docker we use inspect
 ---------------------------------------------------------------------------------
 
@@ -133,12 +139,17 @@ spec:
   containers:
   - name: nginx
     image: nginx
-----------------------------------------
+
+kubectl describe pod <pod_name>
+kubectl describe pod annotations --> to check pod information
+-------------------------------------------------------------
+
+
 
 environment variables
 =====================
 env in Dockerfile should rebuild if you change
-env in manifest no need to rebuild, just restart is enough
+env in manifest no need to rebuild, just restart is enough 
 
 apiVersion: v1
 kind: Pod
@@ -154,10 +165,9 @@ spec:
     - name: owner
       value: "siva kumar"
 
-
 kubectl describe pod env-demo
 
-kubectl exec -it env-demo -- bash
+kubectl exec -it env-demo -- bash --> to enter inside the 
 ---------------------------------
 
 Resources Limits
@@ -178,10 +188,11 @@ spec:
         memory: 100Mi
         cpu: 120m
         
-
 kubectl apply -f 07-resource-limits.yaml
 
 kubectl get pods
+
+kubectl describe pod <pod_name>
 
 kubectl describe pod limits
 
