@@ -1,0 +1,30 @@
+Static Provisioning
+====================
+EBS
+---
+1. Create volume manually 
+volume id : vol-0f41d920c840991da
+
+2. we need to install the drivers
+
+ebs csi driver
+
+https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/install.md  --> find link here
+
+kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.36"  --> drivers link 
+
+kubectl get pods -n kube-system --> here is running admin related pods.
+
+3. EKS nodes should have permissions to access EBS volumes.
+
+we have one iam role attached to the ec2 instances, to that iam attach a policy 
+AmazonEBSCSIDriverPolicy
+
+---------------------
+
+persistant volume and persistant volume claim (PV, PVC)
+
+K8 created a wrapper objets to manage underlying volumes, because k8 engineer will not have full idea on volumes.
+
+PV --> it represents tha physical storage like EBS/EFS
+
