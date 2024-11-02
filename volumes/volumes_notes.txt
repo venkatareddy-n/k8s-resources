@@ -28,3 +28,21 @@ K8 created a wrapper objets to manage underlying volumes, because k8 engineer wi
 
 PV --> it represents tha physical storage like EBS/EFS
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-static
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 20Gi
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle: vol-0f41d920c840991da
+
+kubectl apply -f 01-ebs-static.yaml
+
+kubectl get pv --> to see all pv's
+
