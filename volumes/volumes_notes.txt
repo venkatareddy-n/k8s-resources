@@ -67,3 +67,6 @@ EBS Static Provisioning completed..
 EBS-Dynamic Provisioning
 =========================
 install dirvers
+
+
+kubectl get sc  --> to see the storage classes
