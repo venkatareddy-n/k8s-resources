@@ -28,59 +28,19 @@ K8 created a wrapper objets to manage underlying volumes, because k8 engineer wi
 
 PV --> it represents tha physical storage like EBS/EFS
 
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: ebs-static
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 20Gi
-  csi:
-    driver: ebs.csi.aws.com
-    fsType: ext4
-    volumeHandle: vol-0f41d920c840991da
+EBS-Static
+=========
 
 kubectl apply -f 01-ebs-static.yaml
 
 kubectl get pv --> to see all pv's
+-------------
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ebs-static
-spec:
-  storageClassName: ""
-  volumeName: ebs-static
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
 
 kubectl get pvc
 
 kubectl describe pvc ebs-static
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: ebs-static
-spec:
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1a   
-  containers:
-  - name: nginx
-    image: nginx
-    volumeMounts:  # docekr run -v hostpath:containserpath
-    - name: ebs-static
-      mountPath: /usr/share/nginx/html
-  volumes:
-  - name: ebs-static
-    persistentVolumeClaim:
-      claimName: ebs-static
-
+----------
 
 kubectl get pods -o wide
 
@@ -89,4 +49,21 @@ kubectl get pods
 kubectl get nodes --show-labels
 
 topology.kubernetes.io/zone=us-east-1c
+---------------
 
+kubectl get svc
+
+wait for few munites to up loadbalancer
+
+kubectl exec -it ebs-static -- bash --> to enter into pod
+
+kubectl delete -f 01-ebs-static.yaml
+
+delete manually created volume to save the cost.
+
+EBS Static Provisioning completed..
+=================================
+
+EBS-Dynamic Provisioning
+=========================
+install dirvers
