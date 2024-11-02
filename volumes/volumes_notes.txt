@@ -79,3 +79,12 @@ spec:
     persistentVolumeClaim:
       claimName: ebs-static
 
+
+kubectl get pods -o wide
+
+kubectl get pods
+
+kubectl get nodes --show-labels
+
+topology.kubernetes.io/zone=us-east-1c
+

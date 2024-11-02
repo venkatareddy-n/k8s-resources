@@ -12,7 +12,6 @@ spec:
     fsType: ext4
     volumeHandle: vol-0f41d920c840991da
 ---
-
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -31,6 +30,8 @@ kind: Pod
 metadata:
   name: ebs-static
 spec:
+  nodeSelector:
+    topology.kubernetes.io/zone=us-east-1a
   containers:
   - name: nginx
     image: nginx
