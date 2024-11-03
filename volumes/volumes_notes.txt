@@ -82,6 +82,7 @@ EFS Static
 4. Create PV
 5. Create PVC
 6. claim through pod using pvc
+7. open node port in eks worker node
 
 1. EFS Volume created
 
@@ -123,4 +124,24 @@ spec:
 kubectl apply -f 04-efs-static.yaml
 
 kubectl get pv
+
+5. Create PVC
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: expense-efs
+spec:
+  volumeName: expense-efs
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 5Gi
+
+kubectl get pv,pvc
+
+6. claim through pod using pvc
+
 
