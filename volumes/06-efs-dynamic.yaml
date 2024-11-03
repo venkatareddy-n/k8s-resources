@@ -21,12 +21,12 @@ spec:
   - name: nginx
     image: nginx
     volumeMounts:  # docekr run -v hostpath:containserpath
-    - name: expense-efs
+    - name: efs-dynamic
       mountPath: /usr/share/nginx/html
   volumes:
-  - name: expense-efs
+  - name: efs-dynamic
     persistentVolumeClaim:
-      claimName: expense-efs
+      claimName: efs-dynamic
 ---
 kind: Service
 apiVersion: v1
