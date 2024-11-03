@@ -144,4 +144,6 @@ kubectl get pv,pvc
 
 6. claim through pod using pvc
 
+EFS Dynamic
+===========
 
