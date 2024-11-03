@@ -104,3 +104,23 @@ kubectl apply -f public-ecr-driver.yaml
 4. create pv
 https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes/static_provisioning
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: expense-efs
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-0e0e48d46b736ee5b
+
+kubectl apply -f 04-efs-static.yaml
+
+kubectl get pv
+
