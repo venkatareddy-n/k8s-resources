@@ -1,6 +1,6 @@
 Static Provisioning
 ====================
-EBS
+EBS Elastic Block storage (like our hard disk)
 ---
 1. Create volume manually 
 volume id : vol-0f41d920c840991da
@@ -28,14 +28,13 @@ K8 created a wrapper objets to manage underlying volumes, because k8 engineer wi
 
 PV --> it represents tha physical storage like EBS/EFS
 
-EBS-Static
-=========
+EBS-Static Provisioning
+=========================
 
 kubectl apply -f 01-ebs-static.yaml
 
 kubectl get pv --> to see all pv's
 -------------
-
 
 kubectl get pvc
 
@@ -68,5 +67,40 @@ EBS-Dynamic Provisioning
 =========================
 install dirvers
 
-
 kubectl get sc  --> to see the storage classes
+
+=================================================
+
+EFS Elastic File System (like one dirve)
+=======================
+
+EFS Static
+----------
+1. Create EFS volume
+2. Install drivers ans allow 2049 traffic from EKS worker nodes
+3. Give permissions to EKS nodes
+4. Create PV
+5. Create PVC
+6. claim through pod using pvc
+
+1. EFS Volume created
+
+2. Drivers installation
+
+efs kubernetes
+
+https://github.com/kubernetes-sigs/aws-efs-csi-driver  --> find link here
+
+kubectl kustomize \
+    "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-2.X" > public-ecr-driver.yaml
+
+kubectl kustomize \
+    "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-2.1" > public-ecr-driver.yaml
+
+kubectl apply -f public-ecr-driver.yaml
+
+3. attach AmazonEFSCSIDriverPolicy to iam user
+
+4. create pv
+https://github.com/kubernetes-sigs/aws-efs-csi-driver/tree/master/examples/kubernetes/static_provisioning
+
