@@ -14,7 +14,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx-clusterIP
+  name: nginx-clusterip
 spec:
   type: ClusterIP # ByDefault type is ClusterIP
   selector:
