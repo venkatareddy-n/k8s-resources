@@ -6,3 +6,4 @@ spec:
   containers:  # this is equals to docker run -d --name nginx-server nginx
   - name: nginx-server
     image: nginx
+

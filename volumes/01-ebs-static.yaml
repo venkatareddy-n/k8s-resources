@@ -33,7 +33,8 @@ metadata:
     purpose: ebs-static
 spec:
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1a  # specifying region where to your pod should go..
+  # specifying region where to your pod should go..
+    topology.kubernetes.io/zone: us-east-1a  
   containers:
   - name: nginx
     image: nginx

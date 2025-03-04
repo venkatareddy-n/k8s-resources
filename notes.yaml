@@ -1,0 +1,6 @@
+pod vs container
+------------------
+1. pod is the smallest deployable unit in kubernetes
+2. pod can contain one or many containers.
+3. containers in a pod can share same network identity and storage
+4. these are useful in sidecar and proxy patterns
